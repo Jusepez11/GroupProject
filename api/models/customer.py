@@ -10,4 +10,4 @@ class Customer(Base):
     phone_number = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
 
-    orders = relationship('Order', back_populates='customer', cascade="all, delete-orphan")
+    orders = relationship('Order', back_populates='customer')
