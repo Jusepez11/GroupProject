@@ -26,3 +26,13 @@ class Order(OrderBase):
 
     class ConfigDict:
         from_attributes = True
+
+class GuestOrderItem(BaseModel):
+    sandwich_id: int
+    amount: int
+
+class GuestOrder(Order):
+    name: str
+    email: str
+    address: str
+    items: list[GuestOrderItem]
