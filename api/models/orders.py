@@ -2,20 +2,23 @@ from sqlalchemy import Column, ForeignKey, Integer, String, DECIMAL, DATETIME
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from ..dependencies.database import Base
+from sqlalchemy import Float
 
 
-class Order(Base):
+
+
+class Orders(Base):
     __tablename__ = 'orders'
 
     id = Column(Integer, primary_key=True)
-    total_amount = Column(float, nullable=False)
+    total_amount = Column(Float, nullable=False)
     order_status = Column(String, default='Pending')
     order_time = Column(DATETIME, default=datetime)
 
     customer_id = Column(Integer, ForeignKey('customers.id'))
     customer = relationship('Customer', back_populates='orders')
 
-    service_rep_id = Column(Integer, ForeignKey('service_representatives.id'))
+    service_rep_id = Column(Integer, ForeignKey('service_representative.employeeID'))
     service_representative = relationship('ServiceRepresentative', back_populates='orders')
 
     payment = relationship('Payment', back_populates='order', uselist=False)

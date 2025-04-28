@@ -5,27 +5,24 @@ from ..schemas import orders as schema
 from ..dependencies.database import engine, get_db
 
 router = APIRouter(
-    tags=['Orders'],
+    tags=['Order'],
     prefix="/orders"
 )
 
 
-@router.post("/", response_model=schema.Order)
+@router.post("/", response_model=schema.OrderRead)
 def create(request: schema.OrderCreate, db: Session = Depends(get_db)):
     return controller.create(db=db, request=request)
 
-
-@router.get("/", response_model=list[schema.Order])
+@router.get("/", response_model=list[schema.OrderRead])
 def read_all(db: Session = Depends(get_db)):
     return controller.read_all(db)
 
-
-@router.get("/{item_id}", response_model=schema.Order)
+@router.get("/{item_id}", response_model=schema.OrderRead)
 def read_one(item_id: int, db: Session = Depends(get_db)):
     return controller.read_one(db, item_id=item_id)
 
-
-@router.put("/{item_id}", response_model=schema.Order)
+@router.put("/{item_id}", response_model=schema.OrderRead)
 def update(item_id: int, request: schema.OrderUpdate, db: Session = Depends(get_db)):
     return controller.update(db=db, request=request, item_id=item_id)
 
