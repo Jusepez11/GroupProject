@@ -6,6 +6,7 @@ from .sandwiches import Sandwich
 class MenuBase(BaseModel):
     name: str
     price: int
+    menu_id: int;
 
 class MenuCreate(MenuBase):
     manager_ID : int
