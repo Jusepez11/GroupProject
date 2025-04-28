@@ -38,3 +38,14 @@ class OrderUpdate(BaseModel):
     class Config:
         orm_mode = True
 
+
+# ---- NEW CLASSES ADDED FROM averyBranch ----
+class GuestOrderItem(BaseModel):
+    sandwich_id: int
+    amount: int
+
+class GuestOrder(BaseModel):    # <-- FIX here, was wrong before
+    name: str
+    email: str
+    address: str
+    items: list[GuestOrderItem]
