@@ -24,6 +24,22 @@ app.add_middleware(
 model_loader.index()
 indexRoute.load_routes(app)
 
+# View an Order by ID
+@app.get("/orders/{order_id}", response_model=OrderRead)
+def view_order(order_id: int, db: Session = Depends(get_db)):
+    order = db.query(Order).filter(Order.id == order_id).first()
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return order
+
+# View Status of an Order
+@app.get("/orders/{order_id}/status")
+def view_order_status(order_id: int, db: Session = Depends(get_db)):
+    order = db.query(Order).filter(Order.id == order_id).first()
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return {"order_id": order.id, "order_status": order.order_status}
+
 
 # Daniel
 
