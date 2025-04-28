@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .routers import index as indexRoute
 from .models import model_loader
 from .dependencies.config import conf
-from api.models.orders import Order, OrderRead
+from api.models.orders import Orders#, OrderRead
 
 from sqlalchemy.orm import Session
 from .dependencies.database import get_db
@@ -16,7 +16,7 @@ from .models.order_details import OrderDetail
 from .models.menu_items import menu_items
 
 # Import schemas
-from .schemas.orders import GuestOrder
+from .schemas.orders import GuestOrder, OrderRead
 from .schemas.menu_items import MenuItemRead
 
 app = FastAPI()
@@ -39,7 +39,7 @@ indexRoute.load_routes(app)
 # View an Order by ID
 @app.get("/orders/{order_id}", response_model=OrderRead)
 def view_order(order_id: int, db: Session = Depends(get_db)):
-    order = db.query(Order).filter(Order.id == order_id).first()
+    order = db.query(Orders).filter(Orders.id == order_id).first()
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
     return order
@@ -47,7 +47,7 @@ def view_order(order_id: int, db: Session = Depends(get_db)):
 # View Status of an Order
 @app.get("/orders/{order_id}/status")
 def view_order_status(order_id: int, db: Session = Depends(get_db)):
-    order = db.query(Order).filter(Order.id == order_id).first()
+    order = db.query(Orders).filter(Orders.id == order_id).first()
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
     return {"order_id": order.id, "order_status": order.order_status}
@@ -80,7 +80,7 @@ def view_general_information():
 @app.post("/guest/orders")
 def create_guest_order(order_data: GuestOrder, db: Session = Depends(get_db)):
     # Step 1: Create a new order directly (NO separate customer table)
-    new_order = Order(
+    new_order = Orders(
         customer_name=order_data.name,
         description=f"Guest order for {order_data.email}"
     )
@@ -111,7 +111,7 @@ def create_guest_order(order_data: GuestOrder, db: Session = Depends(get_db)):
 # Get customer information for service
 @app.get("/service/orders/{order_id}")
 def get_order(order_id: int, db: Session = Depends(get_db)):
-    order = db.query(Order).filter(Order.id == order_id).first()
+    order = db.query(Orders).filter(Orders.id == order_id).first()
 
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
