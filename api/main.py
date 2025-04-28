@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .routers import index as indexRoute
 from .models import model_loader
 from .dependencies.config import conf
+from api.models.orders import Order, OrderRead
 
 from sqlalchemy.orm import Session
 from .dependencies.database import get_db
