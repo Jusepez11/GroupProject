@@ -15,11 +15,6 @@ class Orders(Base):
     customer_id = Column(Integer, ForeignKey('customers.id'))
     customer = relationship('Customer', back_populates='orders')
 
-    service_rep_id = Column(Integer, ForeignKey('service_representative.employeeID'))
-    service_representative = relationship('ServiceRepresentative', back_populates='orders')
-
     payment = relationship('Payment', back_populates='order', uselist=False)
-    #items = relationship('MenuItem', secondary=order_menuitem, back_populates='orders')
-    #foo
     order_details = relationship("OrderDetail", back_populates="order")
 
