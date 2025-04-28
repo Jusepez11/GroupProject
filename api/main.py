@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from .dependencies.database import get_db
 
 # Import models
-from .models.orders import Order
+from .models.orders import Orders
 from .models.sandwiches import Sandwich
 from .models.order_details import OrderDetail
 from .models.menu_items import menu_items
