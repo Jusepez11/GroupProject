@@ -7,7 +7,7 @@ class Promotion(Base):
     __tablename__ = "promotion"
 
     promoCode = Column(Integer, primary_key=True, index=True)
-    description = Column(String, nullable=False)
+    description = Column(String(355), nullable=False)
     discount_percent = Column(DECIMAL, nullable=False)
     menu_id = Column(Integer, ForeignKey("menu.menuID"))
 
