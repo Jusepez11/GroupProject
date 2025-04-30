@@ -53,7 +53,7 @@ def view_order_status(order_id: int, db: Session = Depends(get_db)):
     return {"order_id": order.id, "order_status": order.order_status}
 
 # Get Menu
-@app.get("/menu", response_model=list[MenuItemRead])
+@app.get("Restaurant Information/menu", response_model=list[MenuItemRead])
 def get_menu(db: Session = Depends(get_db)):
     menu = db.query(menu_items).all()
     if not menu:
@@ -61,7 +61,7 @@ def get_menu(db: Session = Depends(get_db)):
     return menu
 
 # View General Information
-@app.get("/info")
+@app.get("Restaurant Information/info")
 def view_general_information():
     return {
         "restaurant_name": "Nova",
