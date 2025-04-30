@@ -16,3 +16,9 @@ class Menu(MenuBase):
 
     class ConfigDict:
         from_attributes = True
+
+
+# Add to the bottom of api/schemas/menu.py
+
+class MenuUpdate(BaseModel):
+    name: str

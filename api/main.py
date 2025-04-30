@@ -1,12 +1,15 @@
-import uvicorn
-from fastapi import Depends, FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from .routers import index as indexRoute
-from .models import model_loader
-from .dependencies.config import conf
+from datetime import datetime
+from typing import Optional
+from pydantic import BaseModel
+from .sandwiches import Sandwich
+from .routers import menu  # <-- New line added here
+
 
 
 app = FastAPI()
+
+app.include_router(menu.router)  # <-- This is the new line (include the menu router)
+
 
 origins = ["*"]
 
