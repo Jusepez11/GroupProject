@@ -8,6 +8,8 @@ class Menu(Base):
 
     menuID = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(100), unique=True, nullable=False)
-
+    item = Column(String(100), unique=True, nullable=False)
     manager_id = Column(Integer, ForeignKey("manager.id"))
+
+    menu_items = relationship("MenuItem", back_populates="menu")
     promotions = relationship("Promotion", back_populates="menu_item")

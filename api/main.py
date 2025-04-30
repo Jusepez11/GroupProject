@@ -9,13 +9,13 @@ from sqlalchemy.orm import Session
 from .dependencies.database import get_db
 
 # Import models
-from .models.orders import Order
+from .models.orders import Orders
 from .models.sandwiches import Sandwich
 from .models.order_details import OrderDetail
-from .models.menu_items import menu_items
+from .models.menu_items import MenuItem
 
 # Import schemas
-from .schemas.orders import GuestOrder
+from .schemas.orders import GuestOrder, OrderRead
 from .schemas.menu_items import MenuItemRead
 
 app = FastAPI()
@@ -38,7 +38,7 @@ indexRoute.load_routes(app)
 # View an Order by ID
 @app.get("/orders/{order_id}", response_model=OrderRead)
 def view_order(order_id: int, db: Session = Depends(get_db)):
-    order = db.query(Order).filter(Order.id == order_id).first()
+    order = db.query(Orders).filter(Orders.id == order_id).first()
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
     return order
@@ -46,7 +46,7 @@ def view_order(order_id: int, db: Session = Depends(get_db)):
 # View Status of an Order
 @app.get("/orders/{order_id}/status")
 def view_order_status(order_id: int, db: Session = Depends(get_db)):
-    order = db.query(Order).filter(Order.id == order_id).first()
+    order = db.query(Orders).filter(Orders.id == order_id).first()
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
     return {"order_id": order.id, "order_status": order.order_status}
@@ -54,7 +54,7 @@ def view_order_status(order_id: int, db: Session = Depends(get_db)):
 # Get Menu
 @app.get("/menu", response_model=list[MenuItemRead])
 def get_menu(db: Session = Depends(get_db)):
-    menu = db.query(menu_items).all()
+    menu = db.query(MenuItem).all()
     if not menu:
         raise HTTPException(status_code=404, detail="No menu items found.")
     return menu
@@ -79,9 +79,11 @@ def view_general_information():
 @app.post("/guest/orders")
 def create_guest_order(order_data: GuestOrder, db: Session = Depends(get_db)):
     # Step 1: Create a new order directly (NO separate customer table)
-    new_order = Order(
+    new_order = Orders(
         customer_name=order_data.name,
-        description=f"Guest order for {order_data.email}"
+        description=f"Guest order for {order_data.email}",
+        total_amount= 0.0,
+        order_status="Pending",
     )
     db.add(new_order)
     db.commit()
@@ -100,6 +102,8 @@ def create_guest_order(order_data: GuestOrder, db: Session = Depends(get_db)):
         )
         db.add(order_detail)
 
+        new_order.total_amount += float(sandwich.price) * item.amount
+
     db.commit()
 
     return {
@@ -110,14 +114,14 @@ def create_guest_order(order_data: GuestOrder, db: Session = Depends(get_db)):
 # Get customer information for service
 @app.get("/service/orders/{order_id}")
 def get_order(order_id: int, db: Session = Depends(get_db)):
-    order = db.query(Order).filter(Order.id == order_id).first()
+    order = db.query(Orders).filter(Orders.id == order_id).first()
 
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
 
     # Build a list of sandwich details
     order_items = []
-    for detail in order.order_details:
+    for detail in Orders.order_details:
         order_items.append({
             "sandwich_id": detail.sandwich_id,
             "sandwich_name": detail.sandwich.name if detail.sandwich else "Unknown",
@@ -125,10 +129,10 @@ def get_order(order_id: int, db: Session = Depends(get_db)):
         })
 
     return {
-        "order_id": order.id,
-        "customer_name": order.customer_name,
-        "order_date": order.order_date,
-        "description": order.description,
+        "order_id": Orders.id,
+        "customer_name": Orders.customer_name,
+        "order_date": Orders.order_date,
+        "description": Orders.description,
         "items": order_items
     }
 

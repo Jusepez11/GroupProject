@@ -6,8 +6,8 @@ class Payment(Base):
     __tablename__ = 'payments'
 
     id = Column(Integer, primary_key=True)
+    order_id = Column(Integer, ForeignKey('orders.id'))
     amount = Column(Float, nullable=False)
     approved = Column(Boolean, default=False)
 
-    order_id = Column(Integer, ForeignKey('orders.id'))
-    order = relationship('Order', back_populates='payment')
+    order = relationship('Orders', back_populates='payment')

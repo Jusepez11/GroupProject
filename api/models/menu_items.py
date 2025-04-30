@@ -4,7 +4,7 @@ from datetime import datetime
 from ..dependencies.database import Base
 
 
-class menu_items(Base):
+class MenuItem(Base):
     __tablename__ = "menu_items"
     item_ID = Column(Integer, primary_key=True, index=True, autoincrement=True)
     item_name = Column(String(100), unique=True, nullable=False)
@@ -12,5 +12,10 @@ class menu_items(Base):
     item_price = Column(DECIMAL(10, 2), nullable=False)
     item_category = Column(String(100), nullable=False)
     item_ingredients = Column(String(300), nullable=False)
-    
-    getDetails = relationship("OrderDetail", back_populates="menu_items")
+    menu_id = Column(Integer, ForeignKey('menu.menuID'), nullable=False)
+    manager_id = Column(Integer, ForeignKey('restaurant_manager.id'), nullable=True)
+
+
+    order_details = relationship("OrderDetail", back_populates="menu_items")
+    menu = relationship('Menu', back_populates='menu_items')
+    restaurant_manager = relationship('RestaurantManager', back_populates='menu_items')

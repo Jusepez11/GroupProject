@@ -8,6 +8,7 @@ class RestaurantManager(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(100), unique=True, nullable=False)
+    email = Column(String(255), unique=True, nullable=False)
 
-    menu_items = relationship("Menu", back_populates="manager")
+    menu_items = relationship("MenuItem", back_populates="restaurant_manager")
 
