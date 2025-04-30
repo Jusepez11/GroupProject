@@ -1,4 +1,5 @@
 from . import orders, order_details, recipes, sandwiches, resources, menu, promotion, restaurant_manager, customer, payment, service_rep
+from .menu_items import menu_items
 
 from ..dependencies.database import engine
 
@@ -15,3 +16,4 @@ def index():
     customer.Base.metadata.create_all(engine)
     payment.Base.metadata.create_all(engine)
     service_rep.Base.metadata.create_all(engine)
+    #menu_items.Base.metadata.create_all(engine)
