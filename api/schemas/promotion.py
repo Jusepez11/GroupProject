@@ -4,15 +4,15 @@ from pydantic import BaseModel
 from .sandwiches import Sandwich
 
 class PromotionBase(BaseModel):
-    name: str
-    percentage: float
+    promoCode: str
+    description: str
+    discount_percent: float
 
 class PromotionCreate(PromotionBase):
-    menu_id: int
+    pass
 
 class Promotion(PromotionBase):
-    id: int
-    menu_id: int
+    pass
 
     class ConfigDict:
         from_attributes = True
