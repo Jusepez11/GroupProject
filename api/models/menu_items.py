@@ -13,4 +13,4 @@ class menu_items(Base):
     item_category = Column(String(100), nullable=False)
     item_ingredients = Column(String(300), nullable=False)
     
-    getDetails = relationship("OrderDetail", back_populates="menu_items")
+    #getDetails = relationship("OrderDetail", back_populates="menu_items")

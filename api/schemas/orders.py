@@ -7,11 +7,12 @@ from datetime import datetime
 
 # Shared schema
 class OrderBase(BaseModel):
+    id:int
     total_amount: float
     order_status: Optional[str] = 'Pending'
     order_time: Optional[datetime] = None
-    customer_id: int
-    service_rep_id: int
+    #customer_id: int
+    #service_rep_id: int
 
 
 # For creating a new order
@@ -32,9 +33,10 @@ class OrderUpdate(BaseModel):
     total_amount: Optional[float] = None
     order_status: Optional[str] = None
     order_time: Optional[datetime] = None
+    '''
     customer_id: Optional[int] = None
     service_rep_id: Optional[int] = None
-
+'''
     class Config:
         orm_mode = True
 
