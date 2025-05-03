@@ -4,7 +4,7 @@ from datetime import datetime
 from ..dependencies.database import Base
 
 
-class menu_items(Base):
+class MenuItems(Base):
     __tablename__ = "menu_items"
     item_ID = Column(Integer, primary_key=True, index=True, autoincrement=True)
     item_name = Column(String(100), unique=True, nullable=False)
