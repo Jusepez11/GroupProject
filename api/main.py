@@ -13,7 +13,7 @@ from .dependencies.database import get_db
 from .models.orders import Orders
 from .models.sandwiches import Sandwich
 from .models.order_details import OrderDetail
-from .models.menu_items import menu_items
+from .models.menu_items import MenuItems
 
 # Import schemas
 from .schemas.orders import GuestOrder, OrderRead
