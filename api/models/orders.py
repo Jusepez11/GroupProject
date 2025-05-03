@@ -9,7 +9,7 @@ class Orders(Base):
 
     id = Column(Integer, primary_key=True)
     total_amount = Column(Float, nullable=False)
-    order_status = Column(String, default='Pending')
+    order_status = Column(String(26), default='Pending')
     order_time = Column(DATETIME, default=datetime)
 
 '''
