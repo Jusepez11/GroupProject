@@ -31,9 +31,9 @@ def read_all(db: Session):
     return result
 
 
-def read_one(db: Session, item_id):
+def read_one(db: Session, promoCode):
     try:
-        item = db.query(model.Promotion).filter(model.Promotion.id == item_id).first()
+        item = db.query(model.Promotion).filter(model.Promotion.promoCode == promoCode).first()
         if not item:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Id not found!")
     except SQLAlchemyError as e:
@@ -42,9 +42,9 @@ def read_one(db: Session, item_id):
     return item
 
 
-def update(db: Session, item_id, request):
+def update(db: Session, promoCode, request):
     try:
-        item = db.query(model.Promotion).filter(model.Promotion.id == item_id)
+        item = db.query(model.Promotion).filter(model.Promotion.promoCode == promoCode)
         if not item.first():
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Id not found!")
         update_data = request.dict(exclude_unset=True)
@@ -56,9 +56,9 @@ def update(db: Session, item_id, request):
     return item.first()
 
 
-def delete(db: Session, item_id):
+def delete(db: Session, promoCode):
     try:
-        item = db.query(model.Promotion).filter(model.Promotion.id == item_id)
+        item = db.query(model.Promotion).filter(model.Promotion.promoCode == promoCode)
         if not item.first():
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Id not found!")
         item.delete(synchronize_session=False)
