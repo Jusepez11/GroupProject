@@ -12,6 +12,7 @@ class Orders(Base):
     order_status = Column(String, default='Pending')
     order_time = Column(DATETIME, default=datetime)
 
+'''
     customer_id = Column(Integer, ForeignKey('customers.id'))
     customer = relationship('Customer', back_populates='orders')
 
@@ -23,3 +24,4 @@ class Orders(Base):
     #foo
     order_details = relationship("OrderDetail", back_populates="order")
 
+'''
