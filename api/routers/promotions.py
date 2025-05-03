@@ -28,5 +28,5 @@ def delete(promoCode: str, db: Session = Depends(get_db)):
 
 
 @router.put("/{promoCode}", response_model=schema.Promotion)
-def update(promoCode: int, request: schema.Promotion, db: Session = Depends(get_db)):
+def update(promoCode: str, request: schema.Promotion, db: Session = Depends(get_db)):
     return controller.update(db=db, request=request, promoCode=promoCode)
