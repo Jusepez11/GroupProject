@@ -5,13 +5,15 @@ from .sandwiches import Sandwich
 
 class RestaurantManagerBase(BaseModel):
     name: str
-    id : int
 
 class RestaurantManagerCreate(RestaurantManagerBase):
     pass
 
-class RestaurantManager(RestaurantManagerBase):
+class RestaurantManagerRead(RestaurantManagerBase):
     id: int
+
+class RestaurantManagerUpdate(BaseModel):
+    name: Optional[str] = None
 
     class ConfigDict:
         from_attributes = True
