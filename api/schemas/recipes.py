@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel
 from .resources import Resource
-from .sandwiches import Sandwich
+from .sandwiches import SandwichRead
 
 
 class RecipeBase(BaseModel):
@@ -20,7 +20,7 @@ class RecipeUpdate(BaseModel):
 
 class Recipe(RecipeBase):
     id: int
-    sandwich: Sandwich = None
+    sandwich: SandwichRead = None
     resource: Resource = None
 
     class ConfigDict:

@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel
 
@@ -17,7 +16,7 @@ class SandwichUpdate(BaseModel):
     price: Optional[float] = None
 
 
-class Sandwich(SandwichBase):
+class SandwichRead(SandwichBase):
     id: int
 
     class ConfigDict:

@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel
-from .sandwiches import Sandwich
+from .sandwiches import SandwichRead
 
 class MenuBase(BaseModel):
     name: str
@@ -12,7 +12,7 @@ class MenuCreate(MenuBase):
 
 class Menu(MenuBase):
     id: int
-    sandwiches: list[Sandwich]
+    sandwiches: list[SandwichRead]
 
     class ConfigDict:
         from_attributes = True
