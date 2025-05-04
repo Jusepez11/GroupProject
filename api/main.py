@@ -35,7 +35,7 @@ model_loader.index()
 indexRoute.load_routes(app)
 
 # ------------------- Your original routes -------------------
-
+'''
 # View an Order by ID
 @app.get("/orders/{order_id}", response_model=OrderRead)
 def view_order(order_id: int, db: Session = Depends(get_db)):
@@ -132,7 +132,7 @@ def get_order(order_id: int, db: Session = Depends(get_db)):
         "description": order.description,
         "items": order_items
     }
-
+'''
 # ------------------- End -------------------
 
 if __name__ == "__main__":
