@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .routers import index as indexRoute
 from .models import model_loader
 from .dependencies.config import conf
+'''
 from api.models.orders import Orders#, OrderRead
 
 from sqlalchemy.orm import Session
@@ -18,7 +19,7 @@ from .models.menu_items import MenuItems
 # Import schemas
 from .schemas.orders import GuestOrder, OrderRead
 from .schemas.menu_items import MenuItemRead
-
+'''
 app = FastAPI()
 
 origins = ["*"]
