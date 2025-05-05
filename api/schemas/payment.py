@@ -5,10 +5,8 @@ from typing import Optional
 class PaymentBase(BaseModel):
     amount: float
     approved: Optional[bool] = False
-    '''
-    order_id: int
-    customer_id: int
-    '''
+
+
 
 class PaymentCreate(PaymentBase):
     pass

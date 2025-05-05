@@ -1,8 +1,10 @@
 from .order_details import OrderDetail
-
+from .customer import CustomerRead
 from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime
+
+from ..models.payment import Payment
 
 
 # Shared schema
@@ -13,7 +15,7 @@ class OrderBase(BaseModel):
 
 # For creating a new order
 class OrderCreate(OrderBase):
-    pass
+    customer_id: Optional[int] = None
 
 # For updating an order
 class OrderUpdate(BaseModel):
@@ -26,6 +28,7 @@ class OrderUpdate(BaseModel):
 class OrderRead(OrderBase):
     id: int
     order_details: list[OrderDetail] = None
+    customer: Optional[CustomerRead] = None
 
     class ConfigDict:
         from_attributes = True

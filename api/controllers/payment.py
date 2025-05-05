@@ -8,7 +8,7 @@ from fastapi.responses import Response
 def create(db: Session, request: PaymentCreate):
     new_payment = Payment(
         amount=request.amount,
-        approved=request.approved
+        approved=request.approved,
     )
     try:
         db.add(new_payment)

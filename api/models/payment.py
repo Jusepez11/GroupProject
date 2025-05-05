@@ -8,8 +8,4 @@ class Payment(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     amount = Column(Float, nullable=False)
     approved = Column(Boolean, default=False)
-'''
-    order_id = Column(Integer, ForeignKey('orders.id'))
-    
-    order = relationship('Order', back_populates='payment')
-'''
+

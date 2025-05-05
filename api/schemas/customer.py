@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional, List
-from .orders import OrderRead 
+
 
 
 class CustomerBase(BaseModel):

@@ -5,10 +5,14 @@ from sqlalchemy.exc import SQLAlchemyError
 
 
 def create(db: Session, request):
+    if not request.customer_id:
+        request.customer_id = None
+
     new_item = model.Orders(
         total_amount=request.total_amount,
         order_type=request.order_type,
-        order_status=request.order_status
+        order_status=request.order_status,
+        customer_id=request.customer_id,
     )
 
     try:

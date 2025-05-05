@@ -13,4 +13,7 @@ class Orders(Base):
     order_date = Column(DATETIME, nullable=False, server_default=str(datetime.now()))
     order_type = Column(String(26), default='Takeout')
 
+    customer_id = Column(Integer, ForeignKey('customers.id'), nullable=True)
+    customer = relationship('Customer', backref='orders', lazy='joined')
+
     order_details = relationship("OrderDetail", back_populates="order")
