@@ -8,7 +8,8 @@ def create(db: Session, request):
     new_item = model.Promotion(
         promoCode=request.promoCode,
         description=request.description,
-        discount_percent=request.discount_percent
+        discount_percent=request.discount_percent,
+        expiration_date=request.expiration_date
     )
 
     try:

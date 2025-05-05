@@ -9,3 +9,4 @@ class Promotion(Base):
     promoCode = Column(String(100), primary_key=True, index=True)
     description = Column(String(355), nullable=False)
     discount_percent = Column(DECIMAL, nullable=False)
+    expiration_date = Column(DATETIME, nullable=False )
