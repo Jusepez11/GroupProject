@@ -7,7 +7,7 @@ from .sandwiches import SandwichRead
 class OrderDetailBase(BaseModel):
     amount: int
     order_id: int
-    #sandwich_id: int
+    sandwich_id: int
 
 
 class OrderDetailCreate(OrderDetailBase):
@@ -15,14 +15,14 @@ class OrderDetailCreate(OrderDetailBase):
 
 class OrderDetailUpdate(BaseModel):
     order_id: Optional[int] = None
-    #sandwich_id: Optional[int] = None
+    sandwich_id: Optional[int] = None
     amount: Optional[int] = None
 
 
-class OrderDetail(BaseModel):
+class OrderDetail(OrderDetailBase):
     id: int
-    order_id: int
-    amount: int
+    pass
+
 
     class ConfigDict:
         from_attributes = True
