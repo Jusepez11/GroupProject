@@ -9,6 +9,7 @@ from datetime import datetime
 class OrderBase(BaseModel):
     total_amount: float
     order_status: Optional[str] = 'Pending'
+    order_type: Optional[str] = 'Takeout'
 
 # For creating a new order
 class OrderCreate(OrderBase):
@@ -18,6 +19,7 @@ class OrderCreate(OrderBase):
 class OrderUpdate(BaseModel):
     total_amount: Optional[float] = None
     order_status: Optional[str] = None
+    order_type: Optional[str] = None
 
 
 # For reading/returning an order (e.g. in a GET request)
