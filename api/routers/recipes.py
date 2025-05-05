@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from ..schemas.recipe import RecipeCreate, RecipeUpdate, RecipeRead
+from ..schemas.recipes import RecipeCreate, RecipeUpdate, RecipeRead
 from api.controllers import recipe as controller
 from api.dependencies.database import get_db
 

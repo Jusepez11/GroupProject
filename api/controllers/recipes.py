@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException, status, Response
 from sqlalchemy.exc import SQLAlchemyError
 from ..models import recipe as model
-from ..schemas.recipe import RecipeCreate, RecipeUpdate
+from ..schemas.recipes import RecipeCreate, RecipeUpdate
 
 
 def create_recipe(db: Session, request: RecipeCreate):
