@@ -21,7 +21,6 @@ class CustomerUpdate(BaseModel):
 
 class CustomerRead(CustomerBase):
     id: int
-    orders: List[OrderRead] = []
 
     model_config = {
         "from_attributes": True
