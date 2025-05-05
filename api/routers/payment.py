@@ -1,27 +1,30 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+from ..controllers import payment as controller
+from ..schemas import payment as schema
 from ..dependencies.database import get_db
-from ..schemas.payment import PaymentCreate, PaymentUpdate, PaymentRead
-from ..controllers import payment
 
-router = APIRouter()
+router = APIRouter(
+    tags=['Payment'],
+    prefix="/payments"
+)
 
-@router.post("/payments", response_model=PaymentRead)
-def create_payment(request: PaymentCreate, db: Session = Depends(get_db)):
-    return payment.create(db, request)
+@router.post("/", response_model=schema.PaymentRead)
+def create_payment(request: schema.PaymentCreate, db: Session = Depends(get_db)):
+    return controller.create(db, request)
 
-@router.get("/payments", response_model=list[PaymentRead])
+@router.get("/", response_model=list[schema.PaymentRead])
 def get_all_payments(db: Session = Depends(get_db)):
-    return payment.read_all(db)
+    return controller.read_all(db)
 
-@router.get("/payments/{payment_id}", response_model=PaymentRead)
+@router.get("/{payment_id}", response_model=schema.PaymentRead)
 def get_payment(payment_id: int, db: Session = Depends(get_db)):
-    return payment.read_one(db, payment_id)
+    return controller.read_one(db, payment_id)
 
-@router.put("/payments/{payment_id}", response_model=PaymentRead)
-def update_payment(payment_id: int, request: PaymentUpdate, db: Session = Depends(get_db)):
-    return payment.update(db, payment_id, request)
+@router.put("/{payment_id}", response_model=schema.PaymentRead)
+def update_payment(payment_id: int, request: schema.PaymentUpdate, db: Session = Depends(get_db)):
+    return controller.update(db, payment_id, request)
 
-@router.delete("/payments/{payment_id}")
+@router.delete("/{payment_id}")
 def delete_payment(payment_id: int, db: Session = Depends(get_db)):
-    return payment.delete(db, payment_id)
+    return controller.delete(db, payment_id)
