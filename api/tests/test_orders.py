@@ -20,7 +20,7 @@ def test_create_order(db_session):
         "description": "Test order"
     }
 
-    order_object = model.Order(**order_data)
+    order_object = model.Orders(**order_data)
 
     # Call the create function
     created_order = controller.create(db_session, order_object)
