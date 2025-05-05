@@ -3,7 +3,6 @@ from typing import Optional
 
 
 class MenuItemBase(BaseModel):
-    item_ID: int
     item_name: str
     item_description: str
     item_price: float
