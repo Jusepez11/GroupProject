@@ -10,15 +10,15 @@ router = APIRouter(
 )
 
 
-@router.get("/", response_model=list[schema.Promotion])
+@router.get("/", response_model=list[schema.PromotionRead])
 def read_all(db: Session = Depends(get_db)):
     return controller.read_all(db)
 
-@router.get("/{promoCode}", response_model=schema.Promotion)
+@router.get("/{promoCode}", response_model=schema.PromotionRead)
 def read_one(promoCode: str, db: Session = Depends(get_db)):
     return controller.read_one(db, promoCode=promoCode)
 
-@router.post("/", response_model=schema.Promotion)
+@router.post("/", response_model=schema.PromotionCreate)
 def create(request: schema.PromotionCreate, db: Session = Depends(get_db)):
     return controller.create(db=db, request=request)
 
@@ -27,6 +27,6 @@ def delete(promoCode: str, db: Session = Depends(get_db)):
     return controller.delete(db=db, promoCode=promoCode)
 
 
-@router.put("/{promoCode}", response_model=schema.Promotion)
-def update(promoCode: str, request: schema.Promotion, db: Session = Depends(get_db)):
+@router.put("/{promoCode}", response_model=schema.PromotionUpdate)
+def update(promoCode: str, request: schema.PromotionUpdate, db: Session = Depends(get_db)):
     return controller.update(db=db, request=request, promoCode=promoCode)

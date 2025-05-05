@@ -11,8 +11,15 @@ class PromotionBase(BaseModel):
 class PromotionCreate(PromotionBase):
     pass
 
-class Promotion(PromotionBase):
-    pass
+class PromotionUpdate(BaseModel):
+    promoCode: Optional[str] = None
+    description: Optional[str] = None
+    discount_percent: Optional[float] = None
 
-    class ConfigDict:
-        from_attributes = True
+
+class PromotionRead(PromotionBase):
+    promoCode: str
+
+    model_config = {
+        "from_attributes": True
+    }
