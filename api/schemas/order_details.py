@@ -6,22 +6,23 @@ from .sandwiches import SandwichRead
 
 class OrderDetailBase(BaseModel):
     amount: int
+    order_id: int
+    #sandwich_id: int
 
 
 class OrderDetailCreate(OrderDetailBase):
-    order_id: int
-    sandwich_id: int
+    pass
 
 class OrderDetailUpdate(BaseModel):
     order_id: Optional[int] = None
-    sandwich_id: Optional[int] = None
+    #sandwich_id: Optional[int] = None
     amount: Optional[int] = None
 
 
-class OrderDetail(OrderDetailBase):
+class OrderDetail(BaseModel):
     id: int
     order_id: int
-    sandwich: SandwichRead = None
+    amount: int
 
     class ConfigDict:
         from_attributes = True

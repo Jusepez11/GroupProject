@@ -7,7 +7,7 @@ from sqlalchemy import Float
 class Orders(Base):
     __tablename__ = 'orders'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     total_amount = Column(Float, nullable=False)
     order_status = Column(String(26), default='Pending')
     order_date = Column(DATETIME, nullable=False, server_default=str(datetime.now()))

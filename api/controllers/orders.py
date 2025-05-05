@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from fastapi import HTTPException, status, Response, Depends
 from ..models import orders as model
 from sqlalchemy.exc import SQLAlchemyError
@@ -6,10 +6,8 @@ from sqlalchemy.exc import SQLAlchemyError
 
 def create(db: Session, request):
     new_item = model.Orders(
-        id=request.id,
         total_amount=request.total_amount,
-        order_status=request.order_status,
-        order_time=request.order_time
+        order_status=request.order_status
     )
 
     try:
