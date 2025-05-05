@@ -10,18 +10,15 @@ class RecipeBase(BaseModel):
 
 
 class RecipeCreate(RecipeBase):
-    sandwich_id: int
-    resource_id: int
+    pass
 
 class RecipeUpdate(BaseModel):
-    sandwich_id: Optional[int] = None
-    resource_id: Optional[int] = None
+    #sandwich_id: Optional[int] = None
+    #resource_id: Optional[int] = None
     amount: Optional[int] = None
 
-class Recipe(RecipeBase):
+class RecipeRead(RecipeBase):
     id: int
-    sandwich: SandwichRead = None
-    resource: Resource = None
 
     class ConfigDict:
         from_attributes = True
