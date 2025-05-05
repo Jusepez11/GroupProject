@@ -6,7 +6,7 @@ from .orders import OrderRead
 class CustomerBase(BaseModel):
     name: str
     phone_number: str
-    email: EmailStr
+    email: str
 
 
 class CustomerCreate(CustomerBase):
@@ -16,7 +16,7 @@ class CustomerCreate(CustomerBase):
 class CustomerUpdate(BaseModel):
     name: Optional[str] = None
     phone_number: Optional[str] = None
-    email: Optional[EmailStr] = None
+    email: Optional[str] = None
 
 
 class CustomerRead(CustomerBase):
