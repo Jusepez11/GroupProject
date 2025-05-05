@@ -9,11 +9,11 @@ class RestaurantManagerBase(BaseModel):
 class RestaurantManagerCreate(RestaurantManagerBase):
     pass
 
-class RestaurantManagerRead(RestaurantManagerBase):
-    id: int
-
 class RestaurantManagerUpdate(BaseModel):
     name: Optional[str] = None
+
+class RestaurantManagerRead(RestaurantManagerBase):
+    id: int
 
     class ConfigDict:
         from_attributes = True
