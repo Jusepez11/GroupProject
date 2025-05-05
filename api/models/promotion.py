@@ -9,9 +9,3 @@ class Promotion(Base):
     promoCode = Column(String(100), primary_key=True, index=True)
     description = Column(String(355), nullable=False)
     discount_percent = Column(DECIMAL, nullable=False)
-
-    '''
-    menu_id = Column(Integer, ForeignKey("menu.menuID"))
-
-    menu_item = relationship("Menu", back_populates="promotions")
-    '''
