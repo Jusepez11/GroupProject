@@ -5,7 +5,12 @@ from ..models import sandwiches as model
 from ..schemas import sandwiches as schema
 
 def create(db: Session, request: schema.SandwichCreate):
-    new_sandwich = model.Sandwich(**request.dict())
+    new_sandwich = model.Sandwich(
+        id=request.id,
+        sandwich_name=request.sandwich_name,
+        price=request.price
+    )
+
     try:
         db.add(new_sandwich)
         db.commit()
