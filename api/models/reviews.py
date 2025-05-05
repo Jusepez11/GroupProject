@@ -5,8 +5,11 @@ from ..dependencies.database import Base
 class Review(Base):
     __tablename__ = "reviews"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     customer_id = Column(Integer, ForeignKey("customers.id"))
-    sandwich_id = Column(Integer, ForeignKey("sandwiches.id"), nullable=False)
+    menu_items_id = Column(Integer, ForeignKey("menu_items.item_ID"), nullable=False)
     content = Column(String(500), nullable=False)
     rating = Column(Integer, nullable=False)
+
+
+    menu_item = relationship("MenuItems", back_populates="reviews")

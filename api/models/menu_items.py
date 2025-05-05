@@ -14,3 +14,4 @@ class MenuItems(Base):
     item_ingredients = Column(String(300), nullable=False)
     
     order_details = relationship("OrderDetail", back_populates="menu_item")
+    reviews = relationship("Review", back_populates="menu_item")
