@@ -2,6 +2,10 @@ from sqlalchemy.orm import Session, joinedload
 from fastapi import HTTPException, status, Response, Depends
 from ..models import orders as model
 from sqlalchemy.exc import SQLAlchemyError
+from datetime import date
+from sqlalchemy import func
+
+from ..models.orders import Orders
 
 
 def create(db: Session, request):
@@ -71,3 +75,13 @@ def delete(db: Session, item_id):
         error = str(e.__dict__['orig'])
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+def get_revenue_by_date(db: Session, target_date: date):
+    revenue = db.query(func.sum(Orders.total_amount)).filter(func.date(Orders.order_date) == target_date).all() or 0.0
+    return {"date:" : target_date, "revenue:" : revenue}
+
+def get_orders_within_date_range(db: Session, start_date: date, end_date: date):
+    return db.query(Orders).filter(
+        func.date(Orders.order_date) >= start_date,
+        func.date(Orders.order_date) <= end_date,
+    ).all()

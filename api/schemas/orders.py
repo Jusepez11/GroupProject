@@ -30,8 +30,20 @@ class OrderRead(OrderBase):
     order_details: list[OrderDetail] = None
     customer: Optional[CustomerRead] = None
 
+class RevenueReportResponse(BaseModel):
+    date: datetime
+    total_revenue: float
+
+class OrdersInDateRangeResponse(BaseModel):
+    id: int
+    total_amount: float
+    order_status: str
+    order_type: str
+    order_date: datetime
+
     class ConfigDict:
         from_attributes = True
+
 
 '''
 # ---- NEW CLASSES ADDED FROM averyBranch ----
