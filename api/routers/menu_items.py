@@ -26,6 +26,9 @@ def read_one(item_id: int, db: Session = Depends(get_db)):
 def update(item_id: int, request: schema.MenuItemUpdate, db: Session = Depends(get_db)):
     return controller.update(db=db, request=request, item_id=item_id)
 
+@router.get("/search", response_model=list[schema.MenuItemRead])
+def search_items(keyword: str, db: Session = Depends(get_db)):
+    return controller.search_menu_items(db, keyword)
 
 @router.delete("/{item_id}")
 def delete(item_id: int, db: Session = Depends(get_db)):
