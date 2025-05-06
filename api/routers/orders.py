@@ -43,3 +43,7 @@ def orders_within_range(
     return controller.get_orders_within_date_range(
         db, start_date=start_date, end_date=end_date,
     )
+
+@router.get("/revenue/{target_date}", response_model=schema.RevenueReportResponse)
+def revenue_by_date(target_date: date, db: Session = Depends(get_db)):
+    return controller.get_revenue_by_date(db, target_date)
