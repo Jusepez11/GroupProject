@@ -82,7 +82,12 @@ def get_revenue_by_date(db: Session, target_date: date):
     return {"date": target_date, "total_revenue": revenue or 0.0}
 
 def get_orders_within_date_range(db: Session, start_date: date, end_date: date):
-    return db.query(model.Orders).filter(
+    orders = db.query(model.Orders).filter(
         func.date(model.Orders.order_date) >= start_date,
         func.date(model.Orders.order_date) <= end_date,
     ).all()
+
+    for order in orders:
+        if order.total_amount is None:
+            order.total_amount = 0
+    return orders

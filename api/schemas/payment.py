@@ -8,14 +8,14 @@ class PaymentBase(BaseModel):
     card_info:str
     approved: Optional[bool] = False
     order_id: int
-    customer_id: int
+    customer_id: Optional[int] = None
     promo_code: Optional[str] = None
 
 class PaymentCreate(BaseModel):
     approved: Optional[bool] = False
     order_id: int
     card_info:str
-    customer_id: int
+    customer_id: Optional[int] = None
     promo_code: Optional[str] = None
 
 

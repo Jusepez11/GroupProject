@@ -31,6 +31,9 @@ def create(db: Session, request: PaymentCreate):
             raise HTTPException(status_code=400, detail="Invalid or expired promo code")
         total = total * (float(100 - promo.discount_percent)/100)
 
+    if not request.customer_id:
+        request.customer_id = None
+
     # Create payment
     new_payment = Payment(
         amount=total,
