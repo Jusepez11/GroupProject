@@ -25,6 +25,7 @@ class OrderUpdate(BaseModel):
 # For reading/returning an order (e.g. in a GET request)
 class OrderRead(OrderBase):
     id: int
+    total_amount:float
     order_details: list[OrderDetail] = None
     customer: Optional[CustomerRead] = None
 

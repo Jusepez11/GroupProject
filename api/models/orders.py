@@ -8,7 +8,7 @@ class Orders(Base):
     __tablename__ = 'orders'
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    total_amount = Column(Float, nullable=False)
+    total_amount = Column(Float, nullable=True)
     order_status = Column(String(26), default='Pending')
     order_date = Column(DATETIME, nullable=False, server_default=str(datetime.now()))
     order_type = Column(String(26), default='Takeout')
@@ -17,3 +17,4 @@ class Orders(Base):
     customer = relationship('Customer', backref='orders', lazy='joined')
 
     order_details = relationship("OrderDetail", back_populates="order")
+    payment = relationship('Payment', back_populates='order')
