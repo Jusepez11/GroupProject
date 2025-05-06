@@ -10,7 +10,7 @@ class Payment(Base):
     approved = Column(Boolean, default=False)
     card_info = Column(String(100))
     order_id = Column(Integer, ForeignKey('orders.id'))
-    customer_id = Column(Integer, ForeignKey('customers.id'))
+    customer_id = Column(Integer, ForeignKey('customers.id'), nullable=True)
     promo_code = Column(String(100), ForeignKey('promotion.promoCode'), nullable=True)
 
     order = relationship('Orders', back_populates='payment')
