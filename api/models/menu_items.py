@@ -2,6 +2,8 @@ from sqlalchemy import Column, ForeignKey, Integer, String, DECIMAL, DATETIME
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from ..dependencies.database import Base
+from .order_details import OrderDetail
+
 
 
 class MenuItems(Base):
@@ -13,5 +15,5 @@ class MenuItems(Base):
     item_category = Column(String(100), nullable=False)
     item_ingredients = Column(String(300), nullable=False)
     
-    order_details = relationship("OrderDetail", back_populates="menu_item")
+    order_details = relationship(OrderDetail, back_populates="menu_item")
     reviews = relationship("Review", back_populates="menu_item")

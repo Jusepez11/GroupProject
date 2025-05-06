@@ -7,6 +7,7 @@ from ..schemas.restaurant_manager import (
     RestaurantManagerRead
 )
 from ..controllers import restaurant_manager
+from ..controllers import payment
 
 router = APIRouter()
 
