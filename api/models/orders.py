@@ -8,9 +8,9 @@ class Orders(Base):
     __tablename__ = 'orders'
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    total_amount = Column(Float, nullable=False)
     order_status = Column(String(26), default='Pending')
     order_date = Column(DATETIME, nullable=False, server_default=str(datetime.now()))
     order_type = Column(String(26), default='Takeout')
 
     order_details = relationship("OrderDetail", back_populates="order")
+    payment = relationship("Payment", back_populates="order")

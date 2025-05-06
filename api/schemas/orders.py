@@ -7,7 +7,6 @@ from datetime import datetime
 
 # Shared schema
 class OrderBase(BaseModel):
-    total_amount: float
     order_status: Optional[str] = 'Pending'
     order_type: Optional[str] = 'Takeout'
 
@@ -17,7 +16,6 @@ class OrderCreate(OrderBase):
 
 # For updating an order
 class OrderUpdate(BaseModel):
-    total_amount: Optional[float] = None
     order_status: Optional[str] = None
     order_type: Optional[str] = None
 

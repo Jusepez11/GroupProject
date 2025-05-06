@@ -2,11 +2,12 @@ from sqlalchemy.orm import Session, joinedload
 from fastapi import HTTPException, status, Response, Depends
 from ..models import orders as model
 from sqlalchemy.exc import SQLAlchemyError
-
+from datetime import datetime
+from ..models.payment import Payment
+from ..models.promotion import Promotion
 
 def create(db: Session, request):
     new_item = model.Orders(
-        total_amount=request.total_amount,
         order_type=request.order_type,
         order_status=request.order_status
     )
