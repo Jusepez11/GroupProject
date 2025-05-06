@@ -41,6 +41,8 @@ def create(db: Session, request: PaymentCreate):
         promo_code=request.promo_code
     )
 
+    order.total_amount = total
+
     try:
         db.add(new_payment)
         db.commit()
