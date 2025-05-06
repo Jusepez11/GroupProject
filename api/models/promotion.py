@@ -10,3 +10,5 @@ class Promotion(Base):
     description = Column(String(355), nullable=False)
     discount_percent = Column(DECIMAL, nullable=False)
     expiration_date = Column(DATETIME, nullable=False )
+
+    payment = relationship('Payment', back_populates='promotion')
