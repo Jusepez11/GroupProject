@@ -5,6 +5,7 @@ from . import (
     menu_items,
     payment,
     resources,
+    recipes,
     restaurant_manager,
     service_rep,
     customer,
@@ -19,6 +20,7 @@ def load_routes(app):
     app.include_router(menu_items.router)
     app.include_router(payment.router)
     app.include_router(resources.router)
+    app.include_router(recipes.router)
     app.include_router(restaurant_manager.router)
     app.include_router(service_rep.router)
     app.include_router(customer.router)
