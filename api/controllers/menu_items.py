@@ -9,8 +9,7 @@ def create(db: Session, request):
         item_name=request.item_name,
         item_description=request.item_description,
         item_price=request.item_price,
-        item_category=request.item_category,
-        item_ingredients=request.item_ingredients,
+        item_category=request.item_category
     )
     try:
         db.add(new_item)
