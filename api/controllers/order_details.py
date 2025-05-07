@@ -2,9 +2,31 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException, status, Response, Depends
 from ..models import order_details as model
 from sqlalchemy.exc import SQLAlchemyError
-
+from . import resources as resources_controller
+from ..models.resources import Resource
+from . import recipes as recipes_controller
+from ..models.recipes import Recipe
+from . import menu_items as menu_items_controller
+from ..models.menu_items import MenuItems
 
 def create(db: Session, request):
+    menu_item = db.query(MenuItems).filter(MenuItems.item_ID == request.menu_item_id).first()
+    if not menu_item:
+        raise HTTPException(status_code=404, detail="Recipe not found")
+
+    for recipe in menu_item.recipes:
+        resource = recipe.resource  
+
+        if not resource:
+            raise HTTPException(status_code=404, detail="Resource not found")
+
+        required_amount = recipe.amount * request.amount
+        if resource.amount < required_amount:
+            raise HTTPException(status_code=400, detail=f"Not enough {resource.item} in stock")
+
+        resource.amount -= required_amount
+
+
     new_item = model.OrderDetail(
         order_id=request.order_id,
         menu_item_id=request.menu_item_id,
