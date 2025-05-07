@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from .recipes import RecipeRead
 
 
 class MenuItemBase(BaseModel):
@@ -7,7 +8,6 @@ class MenuItemBase(BaseModel):
     item_description: str
     item_price: float
     item_category: str
-    item_ingredients: str
 
 
 class MenuItemCreate(MenuItemBase):
@@ -19,11 +19,11 @@ class MenuItemUpdate(BaseModel):
     item_description: Optional[str]
     item_price: Optional[float]
     item_category: Optional[str]
-    item_ingredients: Optional[str]
 
 
 class MenuItemRead(MenuItemBase):
     item_ID: int
+    recipes: list[RecipeRead] = None
 
     class Config:
         orm_mode = True

@@ -1,12 +1,14 @@
+from httpx import request
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status, Response
 from sqlalchemy.exc import SQLAlchemyError
-from ..models import recipe as model
+from ..models import recipes as model
 from ..schemas.recipes import RecipeCreate, RecipeUpdate
-
 
 def create_recipe(db: Session, request: RecipeCreate):
     new_recipe = model.Recipe(
+        menu_item_id=request.menu_item_id,
+        resource_id=request.resource_id,
         amount=request.amount
     )
     try:

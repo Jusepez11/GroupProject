@@ -5,6 +5,8 @@ from .resources import Resource
 
 
 class RecipeBase(BaseModel):
+    menu_item_id:int
+    resource_id: int
     amount: int
 
 
@@ -12,12 +14,13 @@ class RecipeCreate(RecipeBase):
     pass
 
 class RecipeUpdate(BaseModel):
-    #sandwich_id: Optional[int] = None
-    #resource_id: Optional[int] = None
+    menu_item_id:Optional[int] = None
+    resource_id: Optional[int] = None
     amount: Optional[int] = None
 
 class RecipeRead(RecipeBase):
     id: int
+    menu_item_id: Optional[int] = None
 
     class ConfigDict:
         from_attributes = True

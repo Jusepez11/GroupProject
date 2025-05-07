@@ -13,7 +13,7 @@ class MenuItems(Base):
     item_description = Column(String(300), nullable=False)
     item_price = Column(DECIMAL(10, 2), nullable=False)
     item_category = Column(String(100), nullable=False)
-    item_ingredients = Column(String(300), nullable=False)
     
     order_details = relationship(OrderDetail, back_populates="menu_item")
     reviews = relationship("Review", back_populates="menu_item")
+    recipes = relationship("Recipe", back_populates="menu_item")
